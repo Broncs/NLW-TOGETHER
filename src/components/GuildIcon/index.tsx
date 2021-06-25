@@ -1,9 +1,25 @@
 import React from "react";
-import { Image } from "react-native";
+import { Image, View } from "react-native";
 import { styles } from "./styles";
+import DiscordSvg from "../../assets/discord.svg";
 
-export const GuildIcon = () => {
-  const uri =
-    "https://gamerssuffice.com/wp-content/uploads/2019/11/How-to-add-bots-to-discord-500x405.jpg";
-  return <Image source={{ uri }} resizeMode="cover" style={styles.image} />;
+const { CDN_IMAGE } = process.env;
+
+type Props = {
+  guildId: string;
+  iconId: string | null;
+};
+
+export const GuildIcon = ({ guildId, iconId }: Props) => {
+  const uri = `${CDN_IMAGE}/icons/${guildId}/${iconId}.png`;
+  // "https://gamerssuffice.com/wp-content/uploads/2019/11/How-to-add-bots-to-discord-500x405.jpg";
+  return (
+    <View style={styles.container}>
+      {iconId ? (
+        <Image source={{ uri }} resizeMode="cover" style={styles.image} />
+      ) : (
+        <DiscordSvg width={40} height={40} />
+      )}
+    </View>
+  );
 };
