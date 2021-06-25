@@ -25,8 +25,8 @@ export const Home = () => {
     categoryId === category ? setCategory("") : setCategory(categoryId);
   };
 
-  const handleAppointmentDetails = () => {
-    navigation.navigate("AppointmentDetails");
+  const handleAppointmentDetails = (guildSelected: AppointmentProps) => {
+    navigation.navigate("AppointmentDetails", { guildSelected });
   };
   const handleAppointmentCreate = () => {
     navigation.navigate("AppointmentCreate");
@@ -66,13 +66,19 @@ export const Home = () => {
         <Load />
       ) : (
         <>
-          <ListHeader title="Partidas agendadas" subtitle="Total 6" />
+          <ListHeader
+            title="Partidas agendadas"
+            subtitle={`Total ${appointments.length}`}
+          />
 
           <FlatList
             data={appointments}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <Appointment data={item} onPress={handleAppointmentDetails} />
+              <Appointment
+                data={item}
+                onPress={() => handleAppointmentDetails(item)}
+              />
             )}
             ItemSeparatorComponent={() => <ListDivider />}
             contentContainerStyle={{ paddingBottom: 69 }}
