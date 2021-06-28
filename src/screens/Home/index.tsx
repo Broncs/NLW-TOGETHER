@@ -37,7 +37,6 @@ export const Home = () => {
     const storage: AppointmentProps[] = response ? JSON.parse(response) : [];
 
     if (category) {
-      console.log(category);
       setAppointments(storage.filter((item) => item.category === category));
     } else {
       setAppointments(storage);

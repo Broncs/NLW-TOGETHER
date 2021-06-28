@@ -51,7 +51,6 @@ export const AppointmentDetails = () => {
         `/guilds/${guildSelected.guild.id}/widget.json`
       );
       setWidget(response.data);
-      console.log(response.data.members);
     } catch {
       Alert.alert(
         "Verifique as configuraçoes do servidor , Será que o Widget está habilitado?"
